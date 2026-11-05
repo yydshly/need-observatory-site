@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="寻需静态展示。查看信息来源、搜索与分析流程、每日汇报方式。">
+  <title>寻需 · 网页展示</title>
+  <link rel="stylesheet" href="./showcase.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#main"><span class="brand-mark" aria-hidden="true">寻</span><span>寻需<small>NEED OBSERVATORY</small></span></a>
+      <nav aria-label="网页导航">
+        <a href="#architecture">原理图</a>
+        <a href="#use">本机使用</a>
+      </nav>
+      <span class="edition">静态展示版</span>
+    </div>
+  </header>
+  <main id="main" class="container">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">个人信息观察台</p>
+        <h1 id="page-title">寻需 · 发现与结果</h1>
+        <p class="intro-copy">把公开讨论整理成可回到原文的发现。每天看具体需求、可参考的 AI 思路、作品和重要动态。</p>
+        <div class="intro-actions">
+          <a class="primary-link" href="#architecture">查看可展开的原理图 <span aria-hidden="true">↓</span></a>
+          <a class="text-link" href="#use">本机怎样使用</a>
+        </div>
+      </div>
+      <aside class="edition-note" aria-labelledby="edition-title">
+        <h2 id="edition-title">这个网页能看什么</h2>
+        <p>这里可以浏览系统原理、展开各环节，并查看高清总览图。</p>
+        <p>真实搜索、分析结果、备注保存和语音生成由本机服务提供。本页展示流程说明。</p>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="directions-title">
+      <div class="section-title"><h2 id="directions-title">每日观察的四个方向</h2><span>正式版首页的组织方式</span></div>
+      <div class="directions">
+        <article><h3>需求</h3><p>具体工作、现有办法和遇到的困难。</p></article>
+        <article><h3>AI 思路</h3><p>已经采用的做法、可复用步骤和限制。</p></article>
+        <article><h3>作品</h3><p>实际展示的成品和制作过程。</p></article>
+        <article><h3>重要动态</h3><p>可核对的发布、开源和功能变化。</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="architecture" aria-labelledby="architecture-title">
+      <div class="section-title"><h2 id="architecture-title">每日观察原理图</h2><span>点任一环节查看说明</span></div>
+      <div class="architecture">
+        <dl class="schedule" aria-label="本机运行日程，均为北京时间">
+          <div><dt>09:00</dt><dd>X 和社区定时搜索</dd></div>
+          <div><dt>09:20</dt><dd>主分析与主题归纳</dd></div>
+          <div><dt>10:20</dt><dd>补收晚到结果</dd></div>
+        </dl>
+        <p class="phase"><span>01</span> 并行采集</p>
+        <div class="flow">
+          <details name="pipeline">
+            <summary>固定来源<small>12 个入口 · RSS / 官方 API</small></summary>
+            <p>按入口间隔增量读取 V2EX、Ask HN、Stack Exchange，以及 n8n、Dify、Open WebUI、Paperless 的公开 Issue。</p>
+          </details>
+          <details name="pipeline" open>
+            <summary>X · Grok<small>公开原帖 · 按实际命中回传</small></summary>
+            <p>本机用 webhook 下发固定账号与搜词。Grok 按需求、做法、作品和动态筛选，附原帖和摘录，经 GitHub 私有 Release 回传。</p>
+          </details>
+          <details name="pipeline">
+            <summary>Reddit · LinkedIn<small>Tavily · 公开网页索引</small></summary>
+            <p>用表格自动化、AI 工作流和开源发布等搜词找候选。核对帖子链接、去除模板片段和重复项，再收录。</p>
+          </details>
+        </div>
+        <div class="connector" aria-hidden="true">↓</div>
+        <p class="phase"><span>02</span> 本机处理</p>
+        <div class="flow">
+          <details name="pipeline">
+            <summary>校验入库<small>版本登记与去重</small></summary>
+            <p>核对来源、任务编号、时间窗和原帖。新内容或变更版本进入本机 SQLite 队列。</p>
+          </details>
+          <details name="pipeline">
+            <summary>Codex 逐条分析<small>保留、跳过与原文依据</small></summary>
+            <p>分批阅读材料，给出判断、理由、证据摘录和待核问题，再提出可验证的尝试。</p>
+          </details>
+          <details name="pipeline">
+            <summary>主题归纳<small>相近线索归组</small></summary>
+            <p>按具体问题或做法归组。原文依据可展开，尚未归组的线索单独展示。</p>
+          </details>
+        </div>
+        <div class="connector" aria-hidden="true">↓</div>
+        <p class="phase"><span>03</span> 汇报与复盘</p>
+        <div class="flow flow-outputs">
+          <details name="pipeline">
+            <summary>每日首页<small>按日阅读与核对原帖</small></summary>
+            <p>本机首页展示每日重点、主题、独立线索和下一步建议，也能查看实际搜词及运行回执。</p>
+          </details>
+          <details name="pipeline">
+            <summary>MiniMax 语音<small>点击生成与播放</small></summary>
+            <p>本机从当天有效结论生成文字稿。在首页点「听简报」与「生成语音」，按需合成并播放。</p>
+          </details>
+        </div>
+      </div>
+      <figure class="overview-image">
+        <figcaption><span>一张图看全流程</span><a href="./architecture.png">打开高清原图 ↗</a></figcaption>
+        <a href="./architecture.png"><img src="./architecture.png" width="1800" height="1750" loading="lazy" alt="寻需流程总览。固定来源、X 与社区搜索汇入本机队列，经 Codex 分析形成首页结果和按需语音。"></a>
+      </figure>
+    </section>
+
+    <section class="section usage" id="use" aria-labelledby="use-title">
+      <h2 id="use-title">在自己的电脑上使用</h2>
+      <ol>
+        <li>在私有项目仓库查看 README，克隆项目并准备 Python 3.10 或更高版本。</li>
+        <li>在 Windows 项目目录运行 <code>.\Start-All-Observatory.ps1 -NoBrowser</code>，再打开本机首页。</li>
+        <li>按需配置 Grok、Tavily、Codex 定时分析和 MiniMax。采集、结果和备注在本机网页中使用。</li>
+      </ol>
+      <div class="intro-actions">
+        <a class="primary-link" href="http://127.0.0.1:8768/#daily">打开本机首页</a>
+        <a class="text-link" href="https://github.com/yydshly/need-observatory#readme">项目 README（需仓库访问权限）</a>
+      </div>
+    </section>
+  </main>
+  <footer><div class="container">寻需 · 公开信息观察流程展示</div></footer>
+</body>
+</html>
